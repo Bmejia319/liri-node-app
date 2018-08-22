@@ -1,0 +1,236 @@
+-----Spotify Log Entry Start-----
+Processed on:
+Tue Aug 21 2018 00:14:39 GMT-0400 (EDT)
+
+terminal commands:
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,spotify-this-song,10,Thriller
+
+Data Output: 
+
+========= Result 1 =========
+Artist: Michael Jackson
+Song title: Billie Jean
+Album name: Thriller 25 Super Deluxe Edition
+URL Preview: https://p.scdn.co/mp3-preview/4eb779428d40d579f14d12a9daf98fc66c7d0be4?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+
+========= Result 2 =========
+Artist: Michael Jackson
+Song title: Beat It - Single Version
+Album name: Thriller 25 Super Deluxe Edition
+URL Preview: https://p.scdn.co/mp3-preview/4901df6e0f8bf6ce93e08df7d98a50e220c45799?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+
+========= Result 3 =========
+Artist: Michael Jackson
+Song title: P.Y.T. (Pretty Young Thing)
+Album name: Thriller 25 Super Deluxe Edition
+URL Preview: https://p.scdn.co/mp3-preview/575230ca230ab7a79f1b2980e303d7f1612073f3?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+
+========= Result 4 =========
+Artist: Michael Jackson
+Song title: Thriller
+Album name: Scream
+URL Preview: https://p.scdn.co/mp3-preview/9f288fba4d3380b1ae25e7f88a2054d7fac0bf2d?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+
+========= Result 5 =========
+Artist: Michael Jackson
+Song title: Thriller
+Album name: Michael Jackson's This Is It
+URL Preview: https://p.scdn.co/mp3-preview/0b62db54da539b34856448e509c30ce4601931f5?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+
+========= Result 6 =========
+Artist: Michael Jackson
+Song title: Thriller
+Album name: Thriller 25 Super Deluxe Edition
+URL Preview: https://p.scdn.co/mp3-preview/dd0621b7f11364a37c96031dbedbca6b88dbfa7d?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+
+========= Result 7 =========
+Artist: Michael Jackson
+Song title: Thriller
+Album name: Thriller
+URL Preview: https://p.scdn.co/mp3-preview/e87c95de42eecbed85b08021e3125833ed31ae98?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+
+========= Result 8 =========
+Artist: Michael Jackson
+Song title: P.Y.T. (Pretty Young Thing)
+Album name: Thriller
+URL Preview: https://p.scdn.co/mp3-preview/4b919442d00292086ab30277534cb6f64564c160?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+
+========= Result 9 =========
+Artist: Kidz Bop Kids
+Song title: Thriller
+Album name: KIDZ BOP Halloween
+URL Preview: null
+=============================
+
+========= Result 10 =========
+Artist: Michael Jackson
+Song title: Billie Jean
+Album name: Thriller
+URL Preview: https://p.scdn.co/mp3-preview/fdfa0fe346a16b6aeb8136e6d2b7e11cacc6a06d?cid=f07dcaf4486b4c40a3965381fe881aa7
+=============================
+-----Spotify Log Entry End-----
+
+-----Tweets Log Entry Start-----
+
+Processed at: 
+Tue Aug 21 2018 00:16:55 GMT-0400 (EDT)
+
+terminal commands: 
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,my-tweets
+
+Data Output: 
+
+-----Tweets Log Entry End-----
+
+-----OMDB Log Entry Start-----
+
+Processed on:
+Tue Aug 21 2018 00:17:46 GMT-0400 (EDT)
+
+terminal commands:
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,movie-this,The,Matrix
+
+Data Output: 
+
+Movie Title: The Matrix
+Year: 1999
+IMDB rating: 8.7
+Rotten Tomatoes Rating: 87%
+Country: USA
+Language: English
+Plot: A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.
+Actors: Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving
+
+-----OMDB Log Entry End-----
+
+-----OMDB Log Entry Start-----
+
+Processed on:
+Tue Aug 21 2018 00:18:02 GMT-0400 (EDT)
+
+terminal commands:
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,movie-this,Space,Jam
+
+Data Output: 
+
+Movie Title: Space Jam
+Year: 1996
+IMDB rating: 6.3
+Rotten Tomatoes Rating: 38%
+Country: USA
+Language: English
+Plot: In a desperate attempt to win a basketball match and earn their freedom, the Looney Tunes seek the aid of retired basketball champion, Michael Jordan.
+Actors: Michael Jordan, Wayne Knight, Theresa Randle, Manner Washington
+
+-----OMDB Log Entry End-----
+
+-----OMDB Log Entry Start-----
+
+Processed on:
+Tue Aug 21 2018 00:18:09 GMT-0400 (EDT)
+
+terminal commands:
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,movie-this,Space-Jam
+
+Data Output: 
+
+Movie Title: Space Jam
+Year: 1996
+IMDB rating: 6.3
+Rotten Tomatoes Rating: 38%
+Country: USA
+Language: English
+Plot: In a desperate attempt to win a basketball match and earn their freedom, the Looney Tunes seek the aid of retired basketball champion, Michael Jordan.
+Actors: Michael Jordan, Wayne Knight, Theresa Randle, Manner Washington
+
+-----OMDB Log Entry End-----
+
+-----OMDB Log Entry Start-----
+
+Processed on:
+Tue Aug 21 2018 00:18:20 GMT-0400 (EDT)
+
+terminal commands:
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,movie-this,The,Birds
+
+Data Output: 
+
+Movie Title: The Birds
+Year: 1963
+IMDB rating: 7.7
+Rotten Tomatoes Rating: 96%
+Country: USA
+Language: English
+Plot: A wealthy San Francisco socialite pursues a potential boyfriend to a small Northern California town that slowly takes a turn for the bizarre when birds of all kinds suddenly begin to attack people.
+Actors: Rod Taylor, Jessica Tandy, Suzanne Pleshette, Tippi Hedren
+
+-----OMDB Log Entry End-----
+
+-----Tweets Log Entry Start-----
+
+Processed at: 
+Tue Aug 21 2018 00:19:07 GMT-0400 (EDT)
+
+terminal commands: 
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,my-tweets
+
+Data Output: 
+
+-----Tweets Log Entry End-----
+
+-----Tweets Log Entry Start-----
+
+Processed at: 
+Tue Aug 21 2018 00:20:21 GMT-0400 (EDT)
+
+terminal commands: 
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,my-tweets
+
+Data Output: 
+
+-----Tweets Log Entry End-----
+
+-----Tweets Log Entry Start-----
+
+Processed at: 
+Tue Aug 21 2018 00:20:26 GMT-0400 (EDT)
+
+terminal commands: 
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,my-tweets
+
+Data Output: 
+
+-----Tweets Log Entry End-----
+
+-----Tweets Log Entry Start-----
+
+Processed at: 
+Tue Aug 21 2018 00:21:26 GMT-0400 (EDT)
+
+terminal commands: 
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3.js,my-tweets
+
+Data Output: 
+
+-----Tweets Log Entry End-----
+
+-----Tweets Log Entry Start-----
+
+Processed at: 
+Tue Aug 21 2018 17:33:33 GMT-0400 (EDT)
+
+terminal commands: 
+/usr/local/bin/node,/Users/bmejia319/Desktop/homeworks-final/liri-node-app/test-3,my-tweets
+
+Data Output: 
+
+-----Tweets Log Entry End-----
+
