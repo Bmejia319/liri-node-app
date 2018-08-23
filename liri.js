@@ -11,7 +11,9 @@ var spotify = new Spotify(keys.spotify);
 var Twitter = require('twitter');
 var client = new Twitter(keys.twitter);
 var liriReturn = process.argv[2];
-var movieName = process.argv[3];
+// var movieName = process.argv[3];
+var term = process.argv.slice(3).join(" ");
+console.log(term);
 
 //Switch statements for multiple commands
 switch (liriReturn) {
@@ -20,7 +22,7 @@ switch (liriReturn) {
 		break;
 
 	case "spotify-this-song":
-		spotifyThisSong();
+		spotifyThisSong(term);
 		break;
 
 	case "movie-this":
@@ -42,6 +44,9 @@ switch (liriReturn) {
 			"Use quotes for multiword titles!");
 };
 
+//Write logger function here, then call it inside of each switch statement
+
+
 //API Call #1: "my-tweets"
 
 
@@ -49,24 +54,32 @@ function myTweets() {
 	var params = { screen_name: 'testacctcolumbi'};
     var client = new Twitter(keys.twitter);
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
-    console.log(tweets);
-    // console.log(response);
+     // console.log(tweets);
+        console.log("\n-------------- Brian's Latest Tweets --------------\n");
      if (!error) {
-    console.log(tweets);
-  } else {
-    console.log("error");
+        for (var i = 0; i < tweets.length; i++) {
+            var createdAt = tweets[i].created_at.split(" ");
+            createdAt.splice(4, 1);
+            console.log(tweets[i].text, createdAt.join(" "));
+            }
+                } else {
+        console.log(error);
 		};
+        console.log("\n--------------------------------------------------\n");
   });
 
+        //create a log function and place that log function inside each of the functions
+        //fs.appendfile("log.text", function (err, ) )
+        //pass what I'm going to log and
 };
 
 
 // Spotify function
 
 function spotifyThisSong(trackName) {
-    var trackName = process.argv[3];
+    // var trackName = process.argv[3];
     if (!trackName) {
-        trackName = "The Sign";
+        trackName = 'Ace of Base';
     };
     songRequest = trackName;
     spotify.search({
@@ -77,6 +90,7 @@ function spotifyThisSong(trackName) {
             if (!err) {
                 var trackInfo = data.tracks.items;
                 for (var i = 0; i < 5; i++) {
+                console.log("\n------------ Spotify Search Result "+ (i+1) +" --------------\n");
                     if (trackInfo[i] != undefined) {
                         var spotifyResults =
                             "Artist: " + trackInfo[i].artists[0].name + "\n" +
@@ -87,6 +101,7 @@ function spotifyThisSong(trackName) {
                         console.log(spotifyResults);
                         console.log(' ');
                     };
+
                 };
             } else {
                 console.log("error: " + err);
@@ -100,10 +115,10 @@ function spotifyThisSong(trackName) {
 function movieThis() {
 
     //using movieName from var list at top
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+    var queryUrl = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
 
     request(queryUrl, function (error, response, body) {
-
+         console.log("\n----------- OMDB Movie Info: " + term + " -----------\n");
         // If the request is successful
         if (!error && response.statusCode === 200) {
 
@@ -124,6 +139,7 @@ function movieThis() {
             console.log("error: " + err);
             return;
         };
+         console.log("\n--------------------------------------------------\n");
     });
 };
 
@@ -132,15 +148,22 @@ function movieThis() {
 // It also adds the spotify command
 function doWhatItSays() {
 
-    fs.writeFile("random.txt", 'spotify-this-song,"Bye Bye Bye"', function (err) {
-        var song = "spotify-this-song 'Bye Bye Bye'"
-        // If the code experiences any errors it will log the error to the console.
-        if (err) {
-            return console.log(err);
-        };
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        var dataArr = data.split(', ');
+        // console.log(dataArr);
 
-        // Otherwise, it will print:
-        console.log(song);
+        // if(dataArr[1] === 'Creep') {
+        //     console.log("Working");
+        // } else {
+        //     return console.log('error');
+        // }
+
+        if(dataArr[0] == 'spotify-this-song') {
+            spotifyThisSong(dataArr[1])
+        } else {
+            return console.log(err);
+        }
+
     });
 };
 
