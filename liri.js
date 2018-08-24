@@ -79,47 +79,49 @@ function myTweets() {
             createdAt.splice(4, 1);
 
             /*Captured formatted tweets in variable finalTweets*/
-            console.log("\nTweet " + (i+1) + ": " + "\"" + tweets[i].text + "\" " + "(Date: " + createdAt.join(" ") + ")");
+            var tweetData = "\nTweet " + (i+1) + ": " + "\"" + tweets[i].text + "\" " + "(Date: " + createdAt.join(" ") + ")";
+            
+            console.log(tweetData);
             }
-                } else {
-        console.log(error);
-		};
+            } else {
+            console.log(err);
+		  };
         console.log("\n--------------------------------------------------\n");
     });
 };
 
 
 /*Command #2: "spotify-this-song"
-spotifyThisSong() is the function that will call the Spotify API and prints 5 song queries related to the song given*/
+spotifyThisSong() is the function that will call the Spotify API and print 5 song queries.
+The "term" variable was added inside of the function on line 24 to capture process.argv[3].
+In spotifyThisSong() function, "term" becomes "trackName"*/
 function spotifyThisSong(trackName) {
-    // var trackName = process.argv[3];
+    
     if (!trackName) {
-        trackName = 'Ace of Base';
+        trackName = "Ace of Base";
     };
-    songRequest = trackName;
-    spotify.search({
-        type: "track",
-        query: songRequest
-    },
-        function (err, data) {
+
+//Variable "trackName" becomes "songRequest" when making API call below
+    var songRequest = trackName;
+
+//Initiates API call to Spotify. Responses will be found in "data."
+    spotify.search({ type: "track", query: songRequest}, function (err, data) {
             if (!err) {
                 var trackInfo = data.tracks.items;
                 for (var i = 0; i < 5; i++) {
                 console.log("\n------------ Spotify Search Result "+ (i+1) +" --------------\n");
-                    if (trackInfo[i] != undefined) {
+                    if (trackInfo[i] !== undefined) {
                         var spotifyResults =
                             "Artist: " + trackInfo[i].artists[0].name + "\n" +
                             "Song: " + trackInfo[i].name + "\n" +
                             "Preview URL: " + trackInfo[i].preview_url + "\n" +
-                            "Album: " + trackInfo[i].album.name + "\n"
+                            "Album: " + trackInfo[i].album.name + "\n";
 
                         console.log(spotifyResults);
-                        console.log(' ');
                     };
-
                 };
             } else {
-                console.log("error: " + err);
+                console.log(err);
                 return;
             };
       });
@@ -149,7 +151,7 @@ function movieThis() {
                 "Origin Country: " + myMovieData.Country + "\n" +
                 "Language: " + myMovieData.Language + "\n" +
                 "Plot: " + myMovieData.Plot + "\n" +
-                "Actors: " + myMovieData.Actors + "\n"
+                "Actors: " + myMovieData.Actors + "\n";
 
             console.log(queryUrlResults);
         } else {
