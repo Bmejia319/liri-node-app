@@ -82,12 +82,17 @@ function myTweets() {
             var tweetData = "\nTweet " + (i+1) + ": " + "\"" + tweets[i].text + "\" " + "(Date: " + createdAt.join(" ") + ")";
             
             console.log(tweetData);
+            fs.appendFile("log.txt", tweetData, function() {
+        console.log(tweetData);
+    });
+
             }
             } else {
             console.log(err);
 		  };
         console.log("\n--------------------------------------------------\n");
     });
+    
 };
 
 
@@ -118,6 +123,9 @@ function spotifyThisSong(trackName) {
                             "Album: " + trackInfo[i].album.name + "\n";
 
                         console.log(spotifyResults);
+                        fs.appendFile("log.txt", spotifyResults, function() {
+        console.log(spotifyResults);
+    });
                     };
                 };
             } else {
@@ -154,6 +162,13 @@ function movieThis() {
                 "Actors: " + myMovieData.Actors + "\n";
 
             console.log(queryUrlResults);
+
+fs.appendFile("log.txt", queryUrlResults, function() {
+        console.log(queryUrlResults);
+    });
+
+
+
         } else {
             console.log(err);
             return;
@@ -172,6 +187,10 @@ function doWhatItSays() {
 
         if(dataArr[0] == 'spotify-this-song') {
             spotifyThisSong(dataArr[1])
+
+        fs.appendFile("log.txt", dataArr[1], function() {
+        console.log(dataArr[1]);
+    });
         } else {
             return console.log(err);
         }
