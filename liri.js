@@ -1,8 +1,8 @@
 
-//Hide keys using dotenv package
+//Hide Spotify and Twitter API keys using dotenv package
 require("dotenv").config();
 
-//Variables used for this project
+//Created the following global variables that will be used throughout liri.js file
 var keys = require("./keys.js");
 var fs = require("fs");
 var request = require("request");
@@ -11,11 +11,10 @@ var spotify = new Spotify(keys.spotify);
 var Twitter = require('twitter');
 var client = new Twitter(keys.twitter);
 var liriReturn = process.argv[2];
-// var movieName = process.argv[3];
 var term = process.argv.slice(3).join(" ");
-console.log(term);
 
-//Switch statements for multiple commands
+//Switch statements that will allow me to call
+//"my-tweets" (Twitter API), "spotify-this-song"(Spotify API), "movie-this" (OMDB API), "do-what-it-says" function
 switch (liriReturn) {
 	case "my-tweets":
 		myTweets(); 
@@ -33,15 +32,16 @@ switch (liriReturn) {
 		doWhatItSays();
 		break;
 
-//User instructions
+//The following instructions are printed to the command line to show the user how to use the CLI
 	default: 
 		console.log(
-			"\n" + "type any command after 'node liri.js': " + "\n" +
-			"my-tweets" + "\n" +
-			"spotify-this-song 'any song title' " + "\n" +
-			"movie-this 'any movie title' " + "\n" +
-			"do-what-it-says " + "\n" +
-			"Use quotes for multiword titles!");
+			"\n" + "------- After writing 'node liri.js' type any of the following commands -------" + "\n" +
+			"1) my-tweets" + "\n" +
+			"2) spotify-this-song 'any song title' " + "\n" +
+			"3) movie-this 'any movie title' " + "\n" +
+			"4) do-what-it-says " + "\n" +
+			 "\n*For the spotify-this-song command, no quotes are needed for the song title\n" +
+			 "\n*For movie-this command, no quotes are needed for the movie title\n");
 };
 
 //Write logger function here, then call it inside of each switch statement
@@ -49,13 +49,15 @@ switch (liriReturn) {
 
 //API Call #1: "my-tweets"
 
-
+//myTweets() is the function that will call the Twitter API and console.log my recent tweets (6)
 function myTweets() {
 	var params = { screen_name: 'testacctcolumbi'};
+
     var client = new Twitter(keys.twitter);
+
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
-     // console.log(tweets);
-        console.log("\n-------------- Brian's Latest Tweets --------------\n");
+    
+    console.log("\n-------------- Brian's Latest Tweets --------------\n");
      if (!error) {
         for (var i = 0; i < tweets.length; i++) {
             var createdAt = tweets[i].created_at.split(" ");
@@ -67,14 +69,14 @@ function myTweets() {
 		};
         console.log("\n--------------------------------------------------\n");
   });
-
         //create a log function and place that log function inside each of the functions
         //fs.appendfile("log.text", function (err, ) )
         //pass what I'm going to log and
 };
 
 
-// Spotify function
+//spotifyThisSong() is the function that will call the Spotify API and console.log 5 song queries
+//related to the song the user inputs
 
 function spotifyThisSong(trackName) {
     // var trackName = process.argv[3];
@@ -110,8 +112,9 @@ function spotifyThisSong(trackName) {
       });
 };
 
-//command 3 movie this
-// run a request to the OMDB API with the movie specified
+//movieThis() is the function that will call the OMDB API and console.log information  
+//related to the movie the user inputs
+
 function movieThis() {
 
     //using movieName from var list at top
