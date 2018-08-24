@@ -10,12 +10,12 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var Twitter = require('twitter');
 var client = new Twitter(keys.twitter);
-var liriReturn = process.argv[2];
+var liriCommand = process.argv[2];
 var term = process.argv.slice(3).join(" ");
 
-//Switch statements that will allow me to call
-//"my-tweets" (Twitter API), "spotify-this-song"(Spotify API), "movie-this" (OMDB API), "do-what-it-says" function
-switch (liriReturn) {
+/*Switch statements that will allow the user to call "my-tweets" (Twitter API), "spotify-this-song"(Spotify API), 
+"movie-this" (OMDB API), "do-what-it-says" function*/
+switch (liriCommand) {
 	case "my-tweets":
 		myTweets(); 
 		break;
@@ -35,49 +35,62 @@ switch (liriReturn) {
 //The following instructions are printed to the command line to show the user how to use the CLI
 	default: 
 		console.log(
-			"\n" + "------- After writing 'node liri.js' type any of the following commands -------" + "\n" +
+			"\n" + "------- After writing node liri.js, type any of the following commands -------" + "\n" +
 			"1) my-tweets" + "\n" +
-			"2) spotify-this-song 'any song title' " + "\n" +
-			"3) movie-this 'any movie title' " + "\n" +
-			"4) do-what-it-says " + "\n" +
-			 "\n*For the spotify-this-song command, no quotes are needed for the song title\n" +
-			 "\n*For movie-this command, no quotes are needed for the movie title\n");
+             "  *This will pull my latest tweets!" + "\n" +
+			"\n2) spotify-this-song + 'any song title' " + "\n" +
+            "   *Example: spotify-this-song Thriller" + "\n" +
+			"\n3) movie-this + 'any movie title'" + "\n" +
+             "  *Example: movie-this The Avengers" + "\n" +
+			"\n4) do-what-it-says" + "\n" +
+             "  *This will perform a random function!\n" + 
+             "\n------------------------------------------------------------------------------\n");
 };
 
 //Write logger function here, then call it inside of each switch statement
 
 
-//API Call #1: "my-tweets"
-
-//myTweets() is the function that will call the Twitter API and console.log my recent tweets (6)
+/*Command #1: "my-tweets"
+myTweets() is the function that will call the Twitter API and console.log my recent tweets (6)*/
 function myTweets() {
+    
+    /*"params" variable holds screen name property for authentication. 
+    Params will be thrown in as an argument into the API call ("client.get")*/
 	var params = { screen_name: 'testacctcolumbi'};
 
+    //"client" variable holds API keys from keys.js file
     var client = new Twitter(keys.twitter);
 
-	client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    //Calling Twitter API
+	client.get('statuses/user_timeline', params, function(err, tweets, response) {
     
+    //Inserted line via console.log
     console.log("\n-------------- Brian's Latest Tweets --------------\n");
-     if (!error) {
+     
+     //For loop used to pull and print tweets and tweet time-stamps ("createdAt")
+     if (!err) {
         for (var i = 0; i < tweets.length; i++) {
+
+            /*Captured tweet time stamps in "createdaAt" variable. 
+            Used .split method to get an array of time-stamp sub-strings*/
             var createdAt = tweets[i].created_at.split(" ");
+
+            /*Used .splice method to remove "+0000" from the time-stamp array*/
             createdAt.splice(4, 1);
-            console.log(tweets[i].text, createdAt.join(" "));
+
+            /*Captured formatted tweets in variable finalTweets*/
+            console.log("\nTweet " + (i+1) + ": " + "\"" + tweets[i].text + "\" " + "(Date: " + createdAt.join(" ") + ")");
             }
                 } else {
         console.log(error);
 		};
         console.log("\n--------------------------------------------------\n");
-  });
-        //create a log function and place that log function inside each of the functions
-        //fs.appendfile("log.text", function (err, ) )
-        //pass what I'm going to log and
+    });
 };
 
 
-//spotifyThisSong() is the function that will call the Spotify API and console.log 5 song queries
-//related to the song the user inputs
-
+/*Command #2: "spotify-this-song"
+spotifyThisSong() is the function that will call the Spotify API and prints 5 song queries related to the song given*/
 function spotifyThisSong(trackName) {
     // var trackName = process.argv[3];
     if (!trackName) {
@@ -108,24 +121,25 @@ function spotifyThisSong(trackName) {
             } else {
                 console.log("error: " + err);
                 return;
-          };
+            };
       });
 };
 
-//movieThis() is the function that will call the OMDB API and console.log information  
-//related to the movie the user inputs
-
+/*Command #3: "movie-this"
+movieThis() is the function that will call the OMDB API and console.log details  related to the movie the user inputs*/
 function movieThis() {
 
-    //using movieName from var list at top
+    /*"term" variable captures full movie title (process.argv[3])
+    Once term is set up, inserted it into "queryUrl" variable for OMDB API call*/ 
     var queryUrl = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
 
-    request(queryUrl, function (error, response, body) {
+    //Call being made to the OMDB API
+    request(queryUrl, function (err, response, body) {
          console.log("\n----------- OMDB Movie Info: " + term + " -----------\n");
         // If the request is successful
-        if (!error && response.statusCode === 200) {
+        if (!err && response.statusCode === 200) {
 
-            //pull requested data in readable format
+            //Parse JSON data into readable format for user
             var myMovieData = JSON.parse(body);
             var queryUrlResults =
                 "Title: " + myMovieData.Title + "\n" +
@@ -139,27 +153,20 @@ function movieThis() {
 
             console.log(queryUrlResults);
         } else {
-            console.log("error: " + err);
+            console.log(err);
             return;
         };
          console.log("\n--------------------------------------------------\n");
     });
 };
 
-//command 4 do-what-it-says
-// This block of code creates a file called "random.txt"
-// It also adds the spotify command
+/*Command #4: do-what-it-says
+doWhatItSays reads a song "I Want It That Way" from a file called "random.txt."
+Then, it performs the spotify-this-song with "I Want It That Way*/
 function doWhatItSays() {
 
     fs.readFile("random.txt", "utf8", function (err, data) {
         var dataArr = data.split(', ');
-        // console.log(dataArr);
-
-        // if(dataArr[1] === 'Creep') {
-        //     console.log("Working");
-        // } else {
-        //     return console.log('error');
-        // }
 
         if(dataArr[0] == 'spotify-this-song') {
             spotifyThisSong(dataArr[1])
