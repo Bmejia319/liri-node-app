@@ -31,7 +31,7 @@ switch (liriCommand) {
     
     default: 
         console.log(
-            "\n" + "------- After writing node liri.js, type any of the following commands -------\n" + "\n" +
+            "\n" + "------- After writing node liri.js, type any of the following commands -------" + "\n" +
             "1) my-tweets" + "\n" +
              "  *This will pull my latest tweets!" + "\n" +
             "\n2) spotify-this-song + 'any song title' " + "\n" +
@@ -49,28 +49,28 @@ function myTweets() {
     var client = new Twitter(keys.twitter);
 
     fs.appendFile("./log.txt", 
-        "\n" + 
-        "------------------------------------- My Tweets -------------------------------------" + 
-        "\n", function(err) {
+        "\n" + "------------------------------------- My Tweets -------------------------------------" 
+        + "\n", function(err) {
                     if(err) throw err;
                 });
+
     client.get('statuses/user_timeline', params, function(err, tweets, response) {
-        console.log("\n--------------- Brian's Latest Tweets ---------------");
+        console.log("\n------------------------------- Brian's Latest Tweets -------------------------------");
         if (!err) {
             for (var i = 0; i < tweets.length; i++) {
-                var createdAt = tweets[i].created_at.split(" ");
-                createdAt.splice(4, 1);
-                var tweetData = "\nTweet " + (i+1) + ": " + "\"" + tweets[i].text + "\" " + "(Date: " + createdAt.join(" ") + ")";
-                console.log(tweetData);
-                fs.appendFile("./log.txt", tweetData + "\n", function(err) {
-                    if (err) throw err;
-                });
-            }
-        } else {
-            console.log(err);
-        };
-        console.log("\n-----------------------------------------------------\n");
+            var createdAt = tweets[i].created_at.split(" ");
+            createdAt.splice(4, 1);
+            var tweetData = "\nTweet " + (i+1) + ": " + "\"" + tweets[i].text + "\" " + "(Date: " + createdAt.join(" ") + ")";
+            console.log(tweetData);
+        fs.appendFile("./log.txt", tweetData + "\n", function(err) {
+        if (err) throw err;
     });
+        }
+    } else {
+        console.log(err);
+    };
+    console.log("\n-------------------------------------------------------------------------------------\n");
+  });
 };
 
 
@@ -80,28 +80,25 @@ function spotifyThisSong(trackName) {
         trackName = "Ace of Base";
     };
     var songRequest = trackName;
-    fs.appendFile("./log.txt", 
-        "\n" + 
-        "------------------------------- Spotify Search Results -----------------------------" + 
-        "\n\n", function(err) {
-            if(err) throw err;
-        });
+
+    fs.appendFile("./log.txt", "\nSpotify Search Results: \n", function(err) {
+        if(err) throw err;
+    });
 
     spotify.search({ type: "track", query: songRequest}, function (err, data) {
         if (!err) {
             var trackInfo = data.tracks.items;
             for (var i = 0; i < 5; i++) {
-                console.log("\n------------- Spotify Search Result "+ (i+1) +" ---------------");
+                console.log("\n------------ Spotify Search Result "+ (i+1) +" --------------\n");
                 if (trackInfo[i] !== undefined) {
                     var spotifyResults =
-                        "\nArtist: " + trackInfo[i].artists[0].name + "\n" +
-                        "\nSong: " + trackInfo[i].name + "\n" +
-                        "\nPreview URL: " + trackInfo[i].preview_url + "\n" +
-                        "\nAlbum: " + trackInfo[i].album.name + "\n";
+                        "Artist: " + trackInfo[i].artists[0].name + "\n" +
+                        "Song: " + trackInfo[i].name + "\n" +
+                        "Preview URL: " + trackInfo[i].preview_url + "\n" +
+                        "Album: " + trackInfo[i].album.name + "\n";
                         console.log(spotifyResults);
-                        fs.appendFile("log.txt", "********* Spotify Search Result " + (i+1) 
-                            + " *********"+ "\n" + spotifyResults + "\n", function(err) {
-                            if(err) throw err;
+                        fs.appendFile("log.txt", spotifyResults, function() {
+                            console.log(spotifyResults);
                         });
                     };
                 };
@@ -109,52 +106,40 @@ function spotifyThisSong(trackName) {
                 console.log(err);
                 return;
             };
-        });
+      });
 };
 
 
 function movieThis() {
     var queryUrl = "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
-    fs.appendFile("./log.txt", 
-        "\n" + 
-        "--------------------------- Movie Details: " + term + " ----------------------------\n" + 
-        "\n", function(err) {
-            if(err) throw err;
-        });
-
     request(queryUrl, function (err, response, body) {
         console.log("\n----------- OMDB Movie Info: " + term + " -----------\n");
         if (!err && response.statusCode === 200) {
             var myMovieData = JSON.parse(body);
             var queryUrlResults =
                 "Title: " + myMovieData.Title + "\n" +
-                "\nYear: " + myMovieData.Year + "\n" +
-                "\nIMDB Rating: " + myMovieData.Ratings[0].Value + "\n" +
-                "\nRotten Tomatoes Rating: " + myMovieData.Ratings[1].Value + "\n" +
-                "\nOrigin Country: " + myMovieData.Country + "\n" +
-                "\nLanguage: " + myMovieData.Language + "\n" +
-                "\nPlot: " + myMovieData.Plot + "\n" +
-                "\nActors: " + myMovieData.Actors + "\n";
+                "Year: " + myMovieData.Year + "\n" +
+                "IMDB Rating: " + myMovieData.Ratings[0].Value + "\n" +
+                "Rotten Tomatoes Rating: " + myMovieData.Ratings[1].Value + "\n" +
+                "Origin Country: " + myMovieData.Country + "\n" +
+                "Language: " + myMovieData.Language + "\n" +
+                "Plot: " + myMovieData.Plot + "\n" +
+                "Actors: " + myMovieData.Actors + "\n";
                 console.log(queryUrlResults);
-                fs.appendFile("log.txt", queryUrlResults, function(err) {
-                    if(err) throw err;
+                fs.appendFile("log.txt", queryUrlResults, function() {
+                    console.log(queryUrlResults);
                 });
             } else {
                 console.log(err);
                 return;
             };
-            console.log("\n-----------------------------------------------------\n");
+            console.log("\n--------------------------------------------------\n");
         });
     };
 
 
 function doWhatItSays() {
-    fs.appendFile("./log.txt", "\n" + 
-        "------------------------------------- Do What It Says -------------------------------------" + 
-        "\n", function(err) {
-                    if(err) throw err;
-                });
-    fs.readFile("./random.txt", "utf8", function (err, data) {
+    fs.readFile("random.txt", "utf8", function (err, data) {
         var dataArr = data.split(', ');
         if(dataArr[0] == 'spotify-this-song') {
             spotifyThisSong(dataArr[1]);
