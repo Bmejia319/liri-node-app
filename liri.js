@@ -23,7 +23,7 @@ switch (liriCommand) {
         break;
 
     case "movie-this":
-        movieThis();
+        movieThis(term);
         break;
 
     case "do-what-it-says":
@@ -34,31 +34,30 @@ switch (liriCommand) {
         //Instructions for user on how to use liri.js
         console.log(
             "\n" +
-                "------------------------------ Instructions --------------------------------\n" +
-                "------------ Type any of the following commands after node liri ------------\n" +
-                "\n" +
-                "1) Pull my latest tweets with the my-tweets command." +
-                "\n" +
-                "  *Example: node liri my-tweets" +
-                "\n" +
-                "\n2) Search any song with spotify-this-song." +
-                "\n" +
-                "   *Example: node liri spotify-this-song Mr. Brightside" +
-                "\n" +
-                "\n3) Look up details about your favorite movies with movie-this." +
-                "\n" +
-                "  *Example: node liri movie-this The Avengers" +
-                "\n" +
-                "\n4) Type do-what-it-says to see Liri perform one of the commands above." +
-                "\n" +
-                "  *Example: node liri do-what-it-says\n" +
-                "\n----------------------------------------------------------------------------\n"
+            "------------------------------ Instructions --------------------------------\n" +
+            "------------ Type any of the following commands after node liri ------------\n" +
+            "\n" +
+            "1) Pull my latest tweets with the my-tweets command." +
+            "\n" +
+            "  *Example: node liri my-tweets" +
+            "\n" +
+            "\n2) Search any song with spotify-this-song." +
+            "\n" +
+            "   *Example: node liri spotify-this-song Mr. Brightside" +
+            "\n" +
+            "\n3) Look up details about your favorite movies with movie-this." +
+            "\n" +
+            "  *Example: node liri movie-this The Avengers" +
+            "\n" +
+            "\n4) Type do-what-it-says to see Liri perform one of the commands above." +
+            "\n" +
+            "  *Example: node liri do-what-it-says\n" +
+            "\n----------------------------------------------------------------------------\n"
         );
 }
 
 //myTweets() calls Twitter API and prints out my most recent tweets
 function myTweets() {
-    
     //params and clietn will use API keys/screen name for authentication
     var params = { screen_name: "testacctcolumbi" };
     var client = new Twitter(keys.twitter);
@@ -67,14 +66,14 @@ function myTweets() {
     fs.appendFile(
         "./log.txt",
         "\n" +
-            "------------------------------------- My Tweets -------------------------------------" +
-            "\n",
-        function(err) {
+        "------------------------------------- My Tweets -------------------------------------" +
+        "\n",
+        function (err) {
             if (err) throw err;
         }
     );
     //Call to Twitter API
-    client.get("statuses/user_timeline", params, function(
+    client.get("statuses/user_timeline", params, function (
         err,
         tweets,
         response
@@ -85,14 +84,13 @@ function myTweets() {
         //For loop cycles through tweets and prints them to the CLI
         if (!err) {
             for (var i = 0; i < tweets.length; i++) {
-                
                 //createdAt variable captures time-stamps
                 //Used .split to return array of time-stamp sub-strings
                 var createdAt = tweets[i].created_at.split(" ");
-                
+
                 //Used .splice to remove "+0000" from array of time-stamps
                 createdAt.splice(4, 1);
-                
+
                 //tweetData variable captures formatted tweets that will be printed to CLI
                 var tweetData =
                     "\nTweet " +
@@ -104,12 +102,12 @@ function myTweets() {
                     "(Date: " +
                     createdAt.join(" ") +
                     ")";
-                
+
                 //Prints tweets to CLI
                 console.log(tweetData);
-                
+
                 //The second fs.appendFile stores the tweets printed in the CLI in log.txt
-                fs.appendFile("./log.txt", tweetData + "\n", function(err) {
+                fs.appendFile("./log.txt", tweetData + "\n", function (err) {
                     if (err) throw err;
                 });
             }
@@ -126,7 +124,6 @@ function myTweets() {
 //spotifyThisSong() searches information about the song the user inputs
 //term variable used in switch statment (line: 22) becomes trackName
 function spotifyThisSong(trackName) {
-    
     //If there is no value after spotify-this-song, trackName is assigned to "The Sign" by Ace of Base
     //trackName is then passed through spotifyThisSong() below
     if (!trackName) {
@@ -138,27 +135,26 @@ function spotifyThisSong(trackName) {
     fs.appendFile(
         "./log.txt",
         "\n" +
-            "------------------------------- Spotify Search Results -----------------------------" +
-            "\n\n",
-        function(err) {
+        "------------------------------- Spotify Search Results -----------------------------" +
+        "\n\n",
+        function (err) {
             if (err) throw err;
         }
     );
 
     //Call to Spotify API
-    spotify.search({ type: "track", query: songRequest }, function(err, data) {
+    spotify.search({ type: "track", query: songRequest }, function (err, data) {
         if (!err) {
             var trackInfo = data.tracks.items;
-            
+
             //For loop cycles through object and prints specific song properties to the CLI
             for (var i = 0; i < 10; i++) {
                 console.log(
                     "\n------------- Spotify Search Result " +
-                        (i + 1) +
-                        " ---------------"
+                    (i + 1) +
+                    " ---------------"
                 );
                 if (trackInfo[i] !== undefined) {
-                    
                     //spotifyResults variable song data
                     var spotifyResults =
                         "\nArtist: " +
@@ -173,20 +169,20 @@ function spotifyThisSong(trackName) {
                         "\nAlbum: " +
                         trackInfo[i].album.name +
                         "\n";
-                    
+
                     //Song data is printed
                     console.log(spotifyResults);
-                    
+
                     //The second fs.appendFile() stores the song data in log.txt
                     fs.appendFile(
                         "log.txt",
                         "********* Spotify Search Result " +
-                            (i + 1) +
-                            " *********" +
-                            "\n" +
-                            spotifyResults +
-                            "\n",
-                        function(err) {
+                        (i + 1) +
+                        " *********" +
+                        "\n" +
+                        spotifyResults +
+                        "\n",
+                        function (err) {
                             if (err) throw err;
                         }
                     );
@@ -200,29 +196,32 @@ function spotifyThisSong(trackName) {
 }
 
 //movieThis() searches for/prints data on a movie the user inputs
-function movieThis() {
+function movieThis(input) {
+    if (!input) {
+        input = "Mr. Nobody";
+    }
+    var film = input;
     var queryUrl =
-        "http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy";
+        "http://www.omdbapi.com/?t=" + film + "&y=&plot=short&apikey=trilogy";
 
     //First fs.appendFile() prints header to log.txt
     fs.appendFile(
         "./log.txt",
         "\n" +
-            "--------------------------- Movie Details: " +
-            term +
-            " ----------------------------\n" +
-            "\n",
-        function(err) {
+        "--------------------------- Movie Details: " +
+        term +
+        " ----------------------------\n" +
+        "\n",
+        function (err) {
             if (err) throw err;
         }
     );
     //Call to OMDB API
-    request(queryUrl, function(err, response, body) {
+    request(queryUrl, function (err, response, body) {
         console.log(
             "\n----------- OMDB Movie Info: " + term + " -----------\n"
         );
         if (!err && response.statusCode === 200) {
-            
             //Parses JSON file into readable text
             var myMovieData = JSON.parse(body);
 
@@ -256,7 +255,7 @@ function movieThis() {
             console.log(queryUrlResults);
 
             //The second fs.appendFile() stores the movie data in log.txt
-            fs.appendFile("log.txt", queryUrlResults, function(err) {
+            fs.appendFile("log.txt", queryUrlResults, function (err) {
                 if (err) throw err;
             });
         } else {
@@ -276,17 +275,17 @@ function doWhatItSays() {
     fs.appendFile(
         "./log.txt",
         "\n" +
-            "---------------------------------- Do What It Says ---------------------------------" +
-            "\n",
-        function(err) {
+        "---------------------------------- Do What It Says ---------------------------------" +
+        "\n",
+        function (err) {
             if (err) throw err;
         }
     );
-    fs.readFile("./random.txt", "utf8", function(err, data) {
+    fs.readFile("./random.txt", "utf8", function (err, data) {
         var dataArr = data.split(", ");
         if (dataArr[0] == "spotify-this-song") {
             spotifyThisSong(dataArr[1]);
-            fs.appendFile("log.txt", dataArr[1], function(err) {
+            fs.appendFile("log.txt", dataArr[1], function (err) {
                 if (err) throw err;
             });
         } else {
