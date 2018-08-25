@@ -14,6 +14,10 @@ var term = process.argv.slice(3).join(" ");
 
 //Switch statements will evaluate command and perform the functions below
 switch (liriCommand) {
+    case "post-tweets":
+        postTweets(term);
+        break;
+
     case "my-tweets":
         myTweets();
         break;
@@ -37,23 +41,58 @@ switch (liriCommand) {
                 "------------------------------ Instructions --------------------------------\n" +
                 "------------ Type any of the following commands after node liri ------------\n" +
                 "\n" +
-                "1) Pull my latest tweets with the my-tweets command." +
+                "1) Post a new tweet to my Twitter feed: @testacctcolumbi with post-tweets." +
+                "\n" +
+                "  *Example: node liri post-tweets My name is Brian" +
+                "\n" +
+                "\n2) Pull my latest tweets with the my-tweets command." +
                 "\n" +
                 "  *Example: node liri my-tweets" +
                 "\n" +
-                "\n2) Search for any song with spotify-this-song." +
+                "\n3) Search for any song with spotify-this-song." +
                 "\n" +
                 "   *Example: node liri spotify-this-song Mr. Brightside" +
                 "\n" +
-                "\n3) Look up details about your favorite movies with movie-this." +
+                "\n4) Look up details about your favorite movies with movie-this." +
                 "\n" +
                 "  *Example: node liri movie-this The Avengers" +
                 "\n" +
-                "\n4) Type do-what-it-says to see Liri perform one of the commands above." +
+                "\n5) Type do-what-it-says to see Liri perform one of the commands above." +
                 "\n" +
                 "  *Example: node liri do-what-it-says\n" +
                 "\n----------------------------------------------------------------------------\n"
         );
+}
+
+//====================================Twitter Tweet Post================================
+function postTweets(post) {
+    var params = { status: post };
+    var client = new Twitter(keys.twitter);
+
+    fs.appendFile(
+        "log.txt",
+        "\n" +
+            "------------------------------------- New Tweet -------------------------------------" +
+            "\n",
+        function(err) {
+            if (err) throw err;
+        }
+    );
+    client.post("statuses/update", params, function(err, tweet, response) {
+        if (!err) {
+            var i = 0;
+            var newPost = tweet.text;
+            console.log(newPost);
+            fs.appendFile(
+                "log.txt",
+                "\n New tweet : " + '"' + newPost + '"' + "\n",
+                function(err) {
+                    if (err) throw err;
+                }
+            );
+        } else {
+        }
+    });
 }
 
 //====================================Tweet Retrieval================================
@@ -95,7 +134,7 @@ function myTweets() {
 
                 //tweetData variable captures formatted tweets that will be printed to CLI
                 var tweetData =
-                    "\nTweet " +
+                    "\n New tweet " +
                     (i + 1) +
                     ": " +
                     '"' +
