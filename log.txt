@@ -1,5 +1,5 @@
 
-------------------------------------- Do What It Says -------------------------------------
+---------------------------------- Do What It Says ---------------------------------
 
 ------------------------------- Spotify Search Results -----------------------------
 
@@ -52,4 +52,54 @@ Song: I Want It That Way
 Preview URL: https://p.scdn.co/mp3-preview/cdde86f49ca4ef217ac08bbbb0c6295c16f015b0?cid=f07dcaf4486b4c40a3965381fe881aa7
 
 Album: I Want It That Way
+
+********* Spotify Search Result 6 *********
+
+Artist: Glee Cast
+
+Song: Bye Bye Bye / I Want It That Way (Glee Cast Version)
+
+Preview URL: https://p.scdn.co/mp3-preview/3aa63b5c98b98ae333e567813e5c720abb2914f0?cid=f07dcaf4486b4c40a3965381fe881aa7
+
+Album: Bye Bye Bye / I Want It That Way (Glee Cast Version)
+
+********* Spotify Search Result 7 *********
+
+Artist: "Weird Al" Yankovic
+
+Song: Ebay (Parody of "I Want It That Way" by the Backstreet Boys)
+
+Preview URL: https://p.scdn.co/mp3-preview/e217ea111ab84a777f204252fce4b18d5de3ae80?cid=f07dcaf4486b4c40a3965381fe881aa7
+
+Album: Poodle Hat
+
+********* Spotify Search Result 8 *********
+
+Artist: Backstreet Boys
+
+Song: I Want It That Way
+
+Preview URL: https://p.scdn.co/mp3-preview/2f96341eb8415a3efb27375db1c4d59928408c2f?cid=f07dcaf4486b4c40a3965381fe881aa7
+
+Album: 90 Sweet 90s Hits!
+
+********* Spotify Search Result 9 *********
+
+Artist: Dynamite Boy
+
+Song: I Want It That Way
+
+Preview URL: null
+
+Album: Punk Goes Pop
+
+********* Spotify Search Result 10 *********
+
+Artist: Backstreet Boys
+
+Song: I Want It That Way
+
+Preview URL: https://p.scdn.co/mp3-preview/adf2485de3f3f375593b5307a792e8d8e6f19794?cid=f07dcaf4486b4c40a3965381fe881aa7
+
+Album: NKOTBSB
 
