@@ -40,3 +40,5 @@ or a movie, or just choose a random action from your own random file.
 # Additional Information
 
 ### Each time you execute a command, Liri will save the data in a separate file called: Log.txt
+
+### YouTube link for video walkthrough: [a link](https://youtu.be/Rh5k72HfPhM)
