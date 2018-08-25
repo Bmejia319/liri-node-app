@@ -36,3 +36,7 @@ or a movie, or just choose a random action from your own random file.
 
 ###4) Type do-what-it-says to see Liri perform one of the commands above.
   *Example: node liri do-what-it-says
+
+#Additional Information
+
+###Each time you execute a command, Liri will save the data in a separate file called: Log.txt
