@@ -54,20 +54,6 @@ switch (liriCommand) {
                 "  *Example: node liri do-what-it-says\n" +
                 "\n----------------------------------------------------------------------------\n"
         );
-}//====================================Twitter Tweet Post================================
-function postTweets(post) {
-
-    var params = { status: post };
-    var client = new Twitter(keys.twitter);
-
-    client.post(
-        "statuses/update",
-        params,
-        function(err, tweet, response) {
-            if (err) throw err;
-            console.log(tweet.text); // Tweet body.
-        }
-    );
 }
 
 //====================================Tweet Retrieval================================
