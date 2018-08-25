@@ -54,8 +54,23 @@ switch (liriCommand) {
                 "  *Example: node liri do-what-it-says\n" +
                 "\n----------------------------------------------------------------------------\n"
         );
+}//====================================Twitter Tweet Post================================
+function postTweets(post) {
+
+    var params = { status: post };
+    var client = new Twitter(keys.twitter);
+
+    client.post(
+        "statuses/update",
+        params,
+        function(err, tweet, response) {
+            if (err) throw err;
+            console.log(tweet.text); // Tweet body.
+        }
+    );
 }
 
+//====================================Tweet Retrieval================================
 //myTweets() calls Twitter API and prints out my most recent tweets
 function myTweets() {
     //params and clietn will use API keys/screen name for authentication
@@ -122,6 +137,7 @@ function myTweets() {
     });
 }
 
+//====================================Spotify Search Results================================
 //spotifyThisSong() searches information about the song the user inputs
 //term variable used in switch statment (line: 22) becomes trackName
 function spotifyThisSong(trackName) {
@@ -197,6 +213,7 @@ function spotifyThisSong(trackName) {
     });
 }
 
+//===================================OMDB Search Results================================
 //movieThis() searches for/prints data on a movie the user inputs
 function movieThis(input) {
     if (!input) {
@@ -271,6 +288,7 @@ function movieThis(input) {
     });
 }
 
+//==================================Random Command Do-What-It-Says================================
 //doWhatItSays() reads data in random.txt file and performs spotify-this-song command
 function doWhatItSays() {
     //First fs.appendFile() prints header to log.txt
