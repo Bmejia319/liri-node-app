@@ -34,25 +34,25 @@ switch (liriCommand) {
         //Instructions for user on how to use liri.js
         console.log(
             "\n" +
-            "------------------------------ Instructions --------------------------------\n" +
-            "------------ Type any of the following commands after node liri ------------\n" +
-            "\n" +
-            "1) Pull my latest tweets with the my-tweets command." +
-            "\n" +
-            "  *Example: node liri my-tweets" +
-            "\n" +
-            "\n2) Search any song with spotify-this-song." +
-            "\n" +
-            "   *Example: node liri spotify-this-song Mr. Brightside" +
-            "\n" +
-            "\n3) Look up details about your favorite movies with movie-this." +
-            "\n" +
-            "  *Example: node liri movie-this The Avengers" +
-            "\n" +
-            "\n4) Type do-what-it-says to see Liri perform one of the commands above." +
-            "\n" +
-            "  *Example: node liri do-what-it-says\n" +
-            "\n----------------------------------------------------------------------------\n"
+                "------------------------------ Instructions --------------------------------\n" +
+                "------------ Type any of the following commands after node liri ------------\n" +
+                "\n" +
+                "1) Pull my latest tweets with the my-tweets command." +
+                "\n" +
+                "  *Example: node liri my-tweets" +
+                "\n" +
+                "\n2) Search for any song with spotify-this-song." +
+                "\n" +
+                "   *Example: node liri spotify-this-song Mr. Brightside" +
+                "\n" +
+                "\n3) Look up details about your favorite movies with movie-this." +
+                "\n" +
+                "  *Example: node liri movie-this The Avengers" +
+                "\n" +
+                "\n4) Type do-what-it-says to see Liri perform one of the commands above." +
+                "\n" +
+                "  *Example: node liri do-what-it-says\n" +
+                "\n----------------------------------------------------------------------------\n"
         );
 }
 
@@ -66,14 +66,15 @@ function myTweets() {
     fs.appendFile(
         "./log.txt",
         "\n" +
-        "------------------------------------- My Tweets -------------------------------------" +
-        "\n",
-        function (err) {
+            "------------------------------------- My Tweets -------------------------------------" +
+            "\n",
+        function(err) {
             if (err) throw err;
         }
     );
+
     //Call to Twitter API
-    client.get("statuses/user_timeline", params, function (
+    client.get("statuses/user_timeline", params, function(
         err,
         tweets,
         response
@@ -107,7 +108,7 @@ function myTweets() {
                 console.log(tweetData);
 
                 //The second fs.appendFile stores the tweets printed in the CLI in log.txt
-                fs.appendFile("./log.txt", tweetData + "\n", function (err) {
+                fs.appendFile("./log.txt", tweetData + "\n", function(err) {
                     if (err) throw err;
                 });
             }
@@ -129,30 +130,31 @@ function spotifyThisSong(trackName) {
     if (!trackName) {
         trackName = "Ace of Base";
     }
+    //songRequest variable qill be used for Spotify API call
     var songRequest = trackName;
 
     //First fs.appendFile() prints header to log.txt
     fs.appendFile(
         "./log.txt",
         "\n" +
-        "------------------------------- Spotify Search Results -----------------------------" +
-        "\n\n",
-        function (err) {
+            "------------------------------- Spotify Search Results -----------------------------" +
+            "\n\n",
+        function(err) {
             if (err) throw err;
         }
     );
 
     //Call to Spotify API
-    spotify.search({ type: "track", query: songRequest }, function (err, data) {
+    spotify.search({ type: "track", query: songRequest }, function(err, data) {
         if (!err) {
             var trackInfo = data.tracks.items;
 
             //For loop cycles through object and prints specific song properties to the CLI
             for (var i = 0; i < 10; i++) {
                 console.log(
-                    "\n------------- Spotify Search Result " +
-                    (i + 1) +
-                    " ---------------"
+                    "\n------------- Spotify Search Results " +
+                        (i + 1) +
+                        " ---------------"
                 );
                 if (trackInfo[i] !== undefined) {
                     //spotifyResults variable song data
@@ -170,19 +172,19 @@ function spotifyThisSong(trackName) {
                         trackInfo[i].album.name +
                         "\n";
 
-                    //Song data is printed
+                    //Prints song data
                     console.log(spotifyResults);
 
                     //The second fs.appendFile() stores the song data in log.txt
                     fs.appendFile(
                         "log.txt",
                         "********* Spotify Search Result " +
-                        (i + 1) +
-                        " *********" +
-                        "\n" +
-                        spotifyResults +
-                        "\n",
-                        function (err) {
+                            (i + 1) +
+                            " *********" +
+                            "\n" +
+                            spotifyResults +
+                            "\n",
+                        function(err) {
                             if (err) throw err;
                         }
                     );
@@ -208,18 +210,18 @@ function movieThis(input) {
     fs.appendFile(
         "./log.txt",
         "\n" +
-        "--------------------------- Movie Details: " +
-        term +
-        " ----------------------------\n" +
-        "\n",
-        function (err) {
+            "--------------------------- Movie Details: " +
+            term +
+            " ----------------------------\n" +
+            "\n",
+        function(err) {
             if (err) throw err;
         }
     );
     //Call to OMDB API
-    request(queryUrl, function (err, response, body) {
+    request(queryUrl, function(err, response, body) {
         console.log(
-            "\n----------- OMDB Movie Info: " + term + " -----------\n"
+            "\n----------- OMDB Movie Info: " + film + " -----------\n"
         );
         if (!err && response.statusCode === 200) {
             //Parses JSON file into readable text
@@ -255,7 +257,7 @@ function movieThis(input) {
             console.log(queryUrlResults);
 
             //The second fs.appendFile() stores the movie data in log.txt
-            fs.appendFile("log.txt", queryUrlResults, function (err) {
+            fs.appendFile("log.txt", queryUrlResults, function(err) {
                 if (err) throw err;
             });
         } else {
@@ -270,22 +272,23 @@ function movieThis(input) {
 }
 
 //doWhatItSays() reads data in random.txt file and performs spotify-this-song command
-//Song is "I Want It That Way"
 function doWhatItSays() {
+    //First fs.appendFile() prints header to log.txt
     fs.appendFile(
         "./log.txt",
         "\n" +
-        "---------------------------------- Do What It Says ---------------------------------" +
-        "\n",
-        function (err) {
+            "---------------------------------- Do What It Says ---------------------------------" +
+            "\n",
+        function(err) {
             if (err) throw err;
         }
     );
-    fs.readFile("./random.txt", "utf8", function (err, data) {
+    fs.readFile("./random.txt", "utf8", function(err, data) {
         var dataArr = data.split(", ");
         if (dataArr[0] == "spotify-this-song") {
-            spotifyThisSong(dataArr[1]);
-            fs.appendFile("log.txt", dataArr[1], function (err) {
+            var rand = spotifyThisSong(dataArr[1]);
+            //The second fs.appendFile() stores the results in log.txt
+            fs.appendFile("log.txt", rand, function(err) {
                 if (err) throw err;
             });
         } else {
